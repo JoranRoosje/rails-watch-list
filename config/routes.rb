@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   end
 
   resources :bookmarks, only: [ :destroy ]
+  root to: "lists#index"
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
