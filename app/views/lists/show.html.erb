@@ -1,11 +1,19 @@
-<h1><%= @list.name %></h1>
-<ul>
-  <% @list.bookmarks.each do |bookmark| %>
-    <li>
-      <p><%= bookmark.comment %> <%= link_to "Delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></p>
-      <p><%= bookmark.movie.title %></p>
-    </li>
-  <% end %>
-</ul>
-<%= link_to "back to lists", lists_path %>
-<%= link_to "add bookmark", new_list_bookmark_path(@list) %>
+<div class="card">
+  <h1><%= @list.name %></h1>
+  <div>
+    <%= link_to "back to lists", lists_path %>
+    <%= link_to "add bookmark", new_list_bookmark_path(@list) %>
+  </div>
+  <ul class="list-group">
+    <% @list.bookmarks.each do |bookmark| %>
+    <div class="card-body">
+      <li class="list-group-item">
+        <img src=<%= bookmark.movie.poster_url %> alt="<%= bookmark.movie.title %> poster">
+        <p><%= bookmark.comment %></p>
+        <p><%= bookmark.movie.title %></p>
+        <%= link_to "Delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-primary" %>
+      </li>
+    </div>
+    <% end %>
+  </ul>
+</div>
